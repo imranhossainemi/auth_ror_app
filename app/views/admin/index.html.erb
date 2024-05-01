@@ -1,0 +1,28 @@
+<% if current_user %>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Last Login Time</th>
+        <th>Registration Time</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.id %></td>
+          <td><%= user.name %></td>
+          <td><%= user.email %></td>
+          <td><%= user.last_login_time %></td>
+          <td><%= user.registration_time %></td>
+          <td><%= user.status %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>You need to be authenticated to access the user management.</p>
+<% end %>
