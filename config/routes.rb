@@ -5,4 +5,12 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "admin#index"
+  
+  resources :admin, only: [:index] do
+    member do
+      put :block
+      put :unblock
+      delete :destroy
+    end
+  end
 end
