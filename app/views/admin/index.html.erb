@@ -17,27 +17,26 @@
           <td><%= user.last_sign_in_at %></td>
           <td><%= user.created_at %></td>
           <td class="d-flex">
-              <% if user.blocked %>
+            <%= form_with url: block_admin_path(user), class: 'px-2', method: :put do %>
+              <% if user.rebuff %>
                 <%= submit_tag 'Block', class: 'block-button btn btn-secondary disabled' %>
               <% else %>
-                <%= form_tag block_admin_path(user), method: :put do %>
-                  <%= submit_tag 'Block', class: 'block-button btn btn-danger' %>
-                <% end %>
+                <%= hidden_field_tag :rebuff, true %>
+                <%= submit_tag 'Block', class: 'block-button btn btn-danger' %>
               <% end %>
+            <% end %>
+
             <%= form_with url: unblock_admin_path(user), class: 'px-2', method: :put do %>
-              <% if user.blocked %>
-                <%= form_tag unblock_admin_path(user), method: :put do %>
-                  <%= hidden_field_tag :user_id, user.id %>
-                  <%= submit_tag 'Unblock', class: 'unblock-button btn btn-info' %>
-                <% end %>
-              <% else %>
+              <% if user.rebuff  %>
+                <%= hidden_field_tag :rebuff, false %>
                 <%= submit_tag 'Unblock', class: 'unblock-button btn btn-info' %>
               <% else %>
                 <%= submit_tag 'Unblock', class: 'unblock-button btn btn-secondary disabled' %>
               <% end %>
             <% end %>
+
             <%= form_with url: admin_path(user), class: 'px-2', method: :delete do %>
-              <%= submit_tag 'Delete', data: { confirm: 'Are you sure?' }, class: 'delete-button btn btn-warning' %>
+              <%= submit_tag 'Delete', class: 'delete-button btn btn-warning' %>
             <% end %>
           </td>
         </tr>
