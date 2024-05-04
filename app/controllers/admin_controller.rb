@@ -1,6 +1,6 @@
 class AdminController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_user, only: [:block, :unblock, :destroy]
+  before_action :set_user, only: %i[block unblock destroy]
 
   def index
     @users = User.all
