@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   private
 
   def check_user_status
-    if current_user && (current_user.blocked? || !current_user.persisted?)
+    if current_user && (current_user.rebuff? || !current_user.persisted?)
       sign_out current_user
       redirect_to new_user_session_path
     end
@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   protected 
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:fullname, :blocked])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:fullname, :blocked])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:fullname, :rebuff ])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:fullname, :rebuff ])
   end
 end
