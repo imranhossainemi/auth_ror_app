@@ -17,23 +17,9 @@
           <td><%= user.last_sign_in_at %></td>
           <td><%= user.created_at %></td>
           <td class="d-flex">
-            <%= form_with url: block_admin_path(user), class: 'px-2', method: :put do %>
-              <% if user.rebuff %>
-                <%= submit_tag 'Block', class: 'block-button btn btn-secondary disabled' %>
-              <% else %>
-                <%= hidden_field_tag :rebuff, true %>
-                <%= submit_tag 'Block', class: 'block-button btn btn-danger' %>
-              <% end %>
-            <% end %>
+            <%= button_to "Unblock", admin_unban_user_path(user), class: user.access_locked? ? 'mx-2 btn btn-success' : 'mx-2 btn disable', method: :post %>
 
-            <%= form_with url: unblock_admin_path(user), class: 'px-2', method: :put do %>
-              <% if user.rebuff  %>
-                <%= hidden_field_tag :rebuff, false %>
-                <%= submit_tag 'Unblock', class: 'unblock-button btn btn-info' %>
-              <% else %>
-                <%= submit_tag 'Unblock', class: 'unblock-button btn btn-secondary disabled' %>
-              <% end %>
-            <% end %>
+            <%= button_to "Block", admin_ban_user_path(user),class: user.access_locked? ? 'mx-2 btn disable' : 'mx-2 btn btn-primary' ,method: :post %>
 
             <%= form_with url: admin_path(user), class: 'px-2', method: :delete do %>
               <%= submit_tag 'Delete', class: 'delete-button btn btn-warning' %>
