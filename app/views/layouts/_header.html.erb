@@ -3,6 +3,7 @@
     <div class="container-fluid">
       <a class="navbar-brand" href="/">Auth App</a>
       <% if current_user.present? %>
+        <p> Welcome, <%= current_user.fullname %></p>
         <%= button_to "Logout", destroy_user_session_path, method: :delete, class: 'btn btn-outline-danger' %>
       <% end %>
   </nav>
