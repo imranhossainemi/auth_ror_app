@@ -17,24 +17,8 @@
           <td><%= user.last_sign_in_at %></td>
           <td><%= user.created_at %></td>
           <td class="d-flex">
-            <%= form_with url: block_admin_path(user), class: 'px-2', method: :put do %>
-              <% if user.rebuff %>
-                <%= submit_tag 'Block', class: 'block-button btn btn-secondary disabled' %>
-              <% else %>
-                <%= hidden_field_tag :rebuff, true %>
-                <%= submit_tag 'Block', class: 'block-button btn btn-danger' %>
-              <% end %>
-            <% end %>
-
-            <%= form_with url: unblock_admin_path(user), class: 'px-2', method: :put do %>
-              <% if user.rebuff  %>
-                <%= hidden_field_tag :rebuff, false %>
-                <%= submit_tag 'Unblock', class: 'unblock-button btn btn-info' %>
-              <% else %>
-                <%= submit_tag 'Unblock', class: 'unblock-button btn btn-secondary disabled' %>
-              <% end %>
-            <% end %>
-
+            <%= button_tag 'Block', block_user_path(user), class: 'block-button btn btn-primary', method: :patch %>
+            <%= button_tag 'Unblock', unblock_user_path(user), class: 'unblock-button btn btn-success', method: :patch %>
             <%= form_with url: admin_path(user), class: 'px-2', method: :delete do %>
               <%= submit_tag 'Delete', class: 'delete-button btn btn-warning' %>
             <% end %>

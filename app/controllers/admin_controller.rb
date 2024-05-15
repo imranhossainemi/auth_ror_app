@@ -7,14 +7,14 @@ class AdminController < ApplicationController
   end
 
   def block
-    @user = User.find(params[:id])
-    @user.update(rebuff: true)
+    user = User.find(params[:id])
+    user.update(rebuff: true)
     redirect_to admin_index_path
   end
 
   def unblock
-    @user = User.find(params[:id])
-    @user.update(rebuff: false)
+    user = User.find(params[:id])
+    user.update(rebuff: false)
     redirect_to admin_index_path
   end
 
