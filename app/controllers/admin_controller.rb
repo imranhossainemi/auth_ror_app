@@ -3,7 +3,7 @@ class AdminController < ApplicationController
   before_action :set_user, only: %i[destroy ban_user unban_user]
 
   def index
-    @users = User.excluding(current_user).all 
+    @users = User.excluding(current_user).all
   end
 
   def destroy
